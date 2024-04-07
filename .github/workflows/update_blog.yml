@@ -26,8 +26,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Test
         run: |
-          curl -X POST https://api.github.com/repos/jmarcelomb/jmarcelomb.github.io/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u ${{ secrets.ACTIONS_KEY }} \
-          --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+          export ACCESS_TOKEN="${{ secrets.ACTIONS_KEY }}"
+          export USERNAME="jmarcelomb"
+          export REPO="jmarcelomb.github.io"
+          export FILENAME_OR_WORKFLOW_ID="hugo.yml"
+          curl \
+            -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token $ACCESS_TOKEN" \
+            https://api.github.com/repos/$USERNAME/$REPO/actions/workflows/$FILENAME_OR_WORKFLOW_ID/dispatches \
+            -d '{"ref":"refs/heads/main"}'
+            
       - uses: actions/checkout@v3
