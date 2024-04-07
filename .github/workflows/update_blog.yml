@@ -28,7 +28,7 @@ jobs:
         run: |
           export ACCESS_TOKEN="${{ secrets.ACTIONS_KEY }}"
           export USERNAME="jmarcelomb"
-          export REPO="jmarcelomb.github.io"
+          export REPO="blog"
           export FILENAME_OR_WORKFLOW_ID="hugo.yml"
           curl \
             -X POST \
