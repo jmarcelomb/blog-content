@@ -7,11 +7,9 @@ summary: "Discover my initial journey into LoRa technology using the LLCC68 modu
 tags: ["LoRa", "LLCC68", "ESP32", "IoT", "Low Power"]
 categories: ["LoRa", "IoT Projects"]
 series: ["LoRa Adventures"]
-ShowToc: true
+ShowToc: false
 TocOpen: true
 ---
-
-# Diving into LoRa: Initial Experiments with LLCC68 and ESP32
 
 While browsing Aliexpress, I stumbled upon some intriguing LoRa modules and decided to give them a try. I ended up purchasing three [LoRa LLCC68 modules](https://pt.aliexpress.com/item/1005005763543912.html?gatewayAdapt=glo2bra):
 
