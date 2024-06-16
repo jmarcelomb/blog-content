@@ -15,17 +15,17 @@ TocOpen: true
 
 While browsing Aliexpress, I stumbled upon some intriguing LoRa modules and decided to give them a try. I ended up purchasing three [LoRa LLCC68 modules](https://pt.aliexpress.com/item/1005005763543912.html?gatewayAdapt=glo2bra):
 
-![LoRa-CC68-X1 module](images/lora-cc68-x1-module.png)
+![LoRa-CC68-X1 module](images/lora-cc68-x1-module.png#center)
 
 I wanted to create a low-power application utilizing LoRa technology. My background includes working on an NB-IoT project for my master's thesis, so I was eager to explore another low-power wireless technology.
 
 As with any new technology, I began with a simple Hello World application. However, when I attempted to mount the ESP32-C3 with the LoRa modules on a breadboard, I encountered a problem: the LoRa module pins had a 2 mm spacing, making them incompatible with a standard breadboard. To solve this, I designed an [adapter board in KiCad](https://github.com/jmarcelomb/lora-adapter-board) that converts the pin spacing to be breadboard-compatible:
 
-![Adapter board, front view](images/lora-board-front.png)
+![Adapter board, front view](images/lora-board-front.png#center)
 
 With the LoRa module now breadboard-compatible, I set up two nodes using ESP32-C3 boards: one as a receiver and the other as a transmitter, as shown below:
 
-![Transmitter and Receiver LoRa nodes](images/two-lora-nodes.jpeg)
+![Transmitter and Receiver LoRa nodes](images/two-lora-nodes.jpeg#center)
 
 For this experiment, I used the `basic` example from the [nopnop2002/esp-idf-sx126x](https://github.com/nopnop2002/esp-idf-sx126x) repository. The wiring was done according to the following table:
 
@@ -44,7 +44,7 @@ For this experiment, I used the `basic` example from the [nopnop2002/esp-idf-sx1
 
 Using the ESP-IDF to build the example, I flashed one ESP32 as the transmitter and the other as the receiver. The monitor output is shown below:
 
-![Application monitor output](images/example-monitor-log.png)
+![Application monitor output](images/example-monitor-log.png#center)
 
 The poor reception and signal quality were due to the lack of an antenna; the PCB trace was functioning as a antenna. Despite this, it was a successful first interaction with LoRa technology. It demonstrated that working with LoRa isn’t as daunting as it might seem and inspired several potential applications, such as creating open/close end-device sensors for my house gates.
 
