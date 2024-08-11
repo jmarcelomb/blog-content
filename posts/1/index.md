@@ -9,6 +9,11 @@ categories: ["Technology", "DIY Projects", "Tutorials"]
 series: ["DIY Mechanical Keyboards"]
 ShowToc: true
 TocOpen: true
+cover:
+  image: images/connections.png
+  alt: nRF52 connected to Raspberry Pi Zero + OpenOCD
+  caption: How to remove flash protection from the nRF52 using Raspberry Pi Zero + OpenOCD
+  relative: true
 ---
 
 # My Journey into the World of DIY Mechanical Keyboards

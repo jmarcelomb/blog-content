@@ -9,6 +9,11 @@ categories: ["LoRa", "IoT Projects"]
 series: ["LoRa Adventures"]
 ShowToc: false
 TocOpen: true
+cover:
+  image: images/lora-cc68-x1-module.png
+  alt: LLCC68 module
+  caption: "Diving into LoRa: Initial Experiments with LLCC68 and ESP32"
+  relative: true
 ---
 
 While browsing Aliexpress, I stumbled upon some intriguing LoRa modules and decided to give them a try. I ended up purchasing three [LoRa LLCC68 modules](https://pt.aliexpress.com/item/1005005763543912.html?gatewayAdapt=glo2bra):
