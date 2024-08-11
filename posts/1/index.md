@@ -24,7 +24,7 @@ Most build examples I found online used the nice!nano v2. In an effort to save m
 To solve this issue, use the following commands:
 
 ```shell
-$ openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_program enable" -c "gdb_breakpoint_override hard" -c "init" -c "reset halt" -c "nrf52_recover"
+openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_program enable" -c "gdb_breakpoint_override hard" -c "init" -c "reset halt" -c "nrf52_recover"
 ```
 
 or 
@@ -36,8 +36,8 @@ openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_pr
 And in another shell:
 
 ```shell
-$ telnet localhost 4444
-$ nrf52.dap apreg 0x04 0x01
+telnet localhost 4444
+nrf52.dap apreg 0x04 0x01
 ```
 
 # Configuration for interface/raspberrypi-native.cfg
@@ -74,15 +74,15 @@ reset_config srst_only srst_push_pull
 I installed Raspberry Pi OS using [Raspberry Pi Imager](https://www.raspberrypi.com/software/), configured it, and connected via SSH. To install OpenOCD on it, I executed the following commands:
 
 ```shell
-$ cd ~
-$ sudo apt-get update
-$ sudo apt-get install git autoconf libtool make pkg-config libusb-1.0-0 libusb-1.0-0-dev
-$ git clone http://openocd.zylin.com/openocd
-$ cd openocd
-$ ./bootstrap
-$ ./configure --enable-sysfsgpio --enable-bcm2835gpio
-$ make
-$ sudo make install
+cd ~
+sudo apt-get update
+sudo apt-get install git autoconf libtool make pkg-config libusb-1.0-0 libusb-1.0-0-dev
+git clone http://openocd.zylin.com/openocd
+cd openocd
+./bootstrap
+./configure --enable-sysfsgpio --enable-bcm2835gpio
+make
+sudo make install
 ```
 
 # Connections
@@ -107,7 +107,7 @@ nrf52.dap apreg 1 0x0c
 To unlock a device with APP enabled, issue an ERASEALL command through the CTRL-AP, followed by a reset. This erases the entire code flash, UICR area, and RAM. Perform this with:
 
 ```shell
-$ openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_program enable" -c "gdb_breakpoint_override hard" -c "init" -c "reset halt" -c "nrf52_recover"
+openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_program enable" -c "gdb_breakpoint_override hard" -c "init" -c "reset halt" -c "nrf52_recover"
 ```
 
 or 
@@ -119,8 +119,8 @@ openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_pr
 And in another shell:
 
 ```shell
-$ telnet localhost 4444
-$ nrf52.dap apreg 0x04 0x01
+telnet localhost 4444
+nrf52.dap apreg 0x04 0x01
 ```
 
 Re-reading the APPROTECTSTATUS register (0x00C) should now return 1. After unlocking, I flashed the bootloader and began training my muscle memory to use this new layout. I’m already using the new keyboard as I write this post! 😂
