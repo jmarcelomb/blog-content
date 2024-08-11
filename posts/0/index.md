@@ -12,13 +12,11 @@ TocOpen: true
 cover:
   image: images/lora-cc68-x1-module.png
   alt: LLCC68 module
-  caption: "Diving into LoRa: Initial Experiments with LLCC68 and ESP32"
+  caption: LoRa-CC68-X1 module.
   relative: true
 ---
 
-While browsing Aliexpress, I stumbled upon some intriguing LoRa modules and decided to give them a try. I ended up purchasing three [LoRa LLCC68 modules](https://pt.aliexpress.com/item/1005005763543912.html?gatewayAdapt=glo2bra):
-
-![LoRa-CC68-X1 module](images/lora-cc68-x1-module.png#center)
+While browsing Aliexpress, I stumbled upon some intriguing LoRa modules and decided to give them a try. I ended up purchasing three [LoRa LLCC68 modules](https://pt.aliexpress.com/item/1005005763543912.html?gatewayAdapt=glo2bra).
 
 I wanted to create a low-power application utilizing LoRa technology. My background includes working on an NB-IoT project for my master's thesis, so I was eager to explore another low-power wireless technology.
 

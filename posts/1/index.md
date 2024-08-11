@@ -12,7 +12,7 @@ TocOpen: true
 cover:
   image: images/connections.png
   alt: nRF52 connected to Raspberry Pi Zero + OpenOCD
-  caption: How to remove flash protection from the nRF52 using Raspberry Pi Zero + OpenOCD
+  caption: Connections between Raspberry Pi Zero and OpenOCD.
   relative: true
 ---
 
