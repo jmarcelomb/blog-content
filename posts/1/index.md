@@ -94,7 +94,9 @@ sudo make install
 
 I soldered the back SWCLK and SWDIO to GPIO 11 and 25, respectively, connected a GND, and the NRF board reset pin to GPIO 24, as shown in the figure below.
 
-![NRF and Raspberry](images/connections.png#center)
+<p align="center">
+  <img width="70%" src="images/connections.png">
+</p>
 
 # Understanding Access Port Protection
 
