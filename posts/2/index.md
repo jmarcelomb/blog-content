@@ -107,7 +107,7 @@ For the case, I used [Sweep Bling MX Sleeve Hard Case](https://www.printables.co
 These enhancements improve the overall functionality and ease of use while maintaining the sleek design of the original model. You can see the end result [here](https://makerworld.com/en/models/605296#profileId-528057).
 
 <p align="center">
-  <img width="60%" src="images/sleeve.jpeg">
+  <img width="80%" src="images/sleeve.jpeg">
 </p>
 
 ## The Build Process: Software
