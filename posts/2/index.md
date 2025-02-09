@@ -64,7 +64,7 @@ The [Corne Keyboard](https://github.com/foostan/crkbd) is a split keyboard with 
 Enter the [Ferris Keyboard](https://github.com/pierrechevalier83/ferris):
 
 <p align="center">
-  <img width="90%" src="https://camo.githubusercontent.com/d51d67d935c7175d060097b88358c16a6a7458fc1786be35b794b8915bc24b9f/68747470733a2f2f692e696d6775722e636f6d2f54436a6b7175522e6a7067">
+  <img width="90%" src="images/ferris_keyboard.jpg">
 </p>
 
 Named after the Rustlang mascot, Ferris, this keyboard instantly won my heart. However, one drawback was that the microcontroller was soldered in, limiting customization. Fortunately, [David Barr](https://github.com/davidphilipbarr) built upon Ferris to create [Sweep](https://github.com/davidphilipbarr/Sweep):
