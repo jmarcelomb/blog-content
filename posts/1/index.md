@@ -32,7 +32,7 @@ To solve this issue, use the following commands:
 openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_program enable" -c "gdb_breakpoint_override hard" -c "init" -c "reset halt" -c "nrf52_recover"
 ```
 
-or 
+or
 
 ```shell
 openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_program enable"
@@ -47,7 +47,7 @@ nrf52.dap apreg 0x04 0x01
 
 # Configuration for interface/raspberrypi-native.cfg
 
-With the follwing `interface/raspberrypi-native.cfg`:
+With the following `interface/raspberrypi-native.cfg`:
 ```shell
 # SPDX-License-Identifier: GPL-2.0-or-later
 
@@ -117,7 +117,7 @@ To unlock a device with APP enabled, issue an ERASEALL command through the CTRL-
 openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_program enable" -c "gdb_breakpoint_override hard" -c "init" -c "reset halt" -c "nrf52_recover"
 ```
 
-or 
+or
 
 ```shell
 openocd -f interface/raspberrypi-native.cfg -f target/nrf52.cfg -c "gdb_flash_program enable"

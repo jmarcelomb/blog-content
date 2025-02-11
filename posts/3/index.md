@@ -14,43 +14,43 @@ TocOpen: true
 
 ## Introduction
 
-My daily workflow involves connecting over SSH and using Neovim, but I struggled with clipboard integration.  
-I wanted a way to **copy text inside Neovim and sync it with my local clipboard** seamlessly.  
+My daily workflow involves connecting over SSH and using Neovim, but I struggled with clipboard integration.
+I wanted a way to **copy text inside Neovim and sync it with my local clipboard** seamlessly.
 
-However, copying and pasting between remote and local machines isn’t always straightforward.  
-Thankfully, **OSC52 (Operating System Command 52)** came to the rescue!  
+However, copying and pasting between remote and local machines isn’t always straightforward.
+Thankfully, **OSC52 (Operating System Command 52)** came to the rescue!
 
-In this post, I'll introduce my **[`copy`](https://github.com/jmarcelomb/.dotfiles/blob/main/scripts/copy)** script that leverages OSC52,  
-explain how OSC52 works, and show how to integrate it into Neovim for a smooth experience.  
+In this post, I'll introduce my **[`copy`](https://github.com/jmarcelomb/.dotfiles/blob/main/scripts/copy)** script that leverages OSC52,
+explain how OSC52 works, and show how to integrate it into Neovim for a smooth experience.
 
 ---
 
 ## What is OSC52?
 
-**OSC52** is a terminal escape sequence that allows you to copy text to your system clipboard from a remote session.  
-It works by encoding the copied text in **Base64** and sending it through a special terminal command,  
-which supported terminal emulators (such as  
-[Alacritty](https://github.com/alacritty/alacritty),  
-[Ghostty](https://github.com/ghostty-org/ghostty),  
-[Kitty](https://github.com/kovidgoyal/kitty),  
-[WezTerm](https://github.com/wezterm/wezterm))  
-detect and copy to your local clipboard.  
+**OSC52** is a terminal escape sequence that allows you to copy text to your system clipboard from a remote session.
+It works by encoding the copied text in **Base64** and sending it through a special terminal command,
+which supported terminal emulators (such as
+[Alacritty](https://github.com/alacritty/alacritty),
+[Ghostty](https://github.com/ghostty-org/ghostty),
+[Kitty](https://github.com/kovidgoyal/kitty),
+[WezTerm](https://github.com/wezterm/wezterm))
+detect and copy to your local clipboard.
 
-This means that even when working on a remote machine over SSH,  
-you can copy text directly to your **local** clipboard without needing tools like `xclip`, `wl-copy`, or `xsel`.  
+This means that even when working on a remote machine over SSH,
+you can copy text directly to your **local** clipboard without needing tools like `xclip`, `wl-copy`, or `xsel`.
 
 ---
 
 ## The Copy and Paste Scripts
 
-To make clipboard management effortless, I created two simple scripts:  
-[`copy`](https://github.com/jmarcelomb/.dotfiles/blob/main/scripts/copy) and  
-[`paste`](https://github.com/jmarcelomb/.dotfiles/blob/main/scripts/paste).  
-You can find them in my **[.dotfiles](https://github.com/jmarcelomb/.dotfiles)** repository.  
+To make clipboard management effortless, I created two simple scripts:
+[`copy`](https://github.com/jmarcelomb/.dotfiles/blob/main/scripts/copy) and
+[`paste`](https://github.com/jmarcelomb/.dotfiles/blob/main/scripts/paste).
+You can find them in my **[.dotfiles](https://github.com/jmarcelomb/.dotfiles)** repository.
 
 ### Copy Script
 
-The [`copy`](https://github.com/jmarcelomb/.dotfiles/blob/main/scripts/copy) script encodes the input in Base64  
+The [`copy`](https://github.com/jmarcelomb/.dotfiles/blob/main/scripts/copy) script encodes the input in Base64
 and sends it using OSC52. Here’s a simplified working version:
 
 ```bash
@@ -129,4 +129,3 @@ allowing seamless clipboard access over SSH.
 
 I hope they help you as well! 😊
 Give them a try, and let me know how they work for you. 🚀
-

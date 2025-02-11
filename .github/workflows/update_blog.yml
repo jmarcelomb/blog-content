@@ -36,5 +36,5 @@ jobs:
             -H "Authorization: token $ACCESS_TOKEN" \
             https://api.github.com/repos/$USERNAME/$REPO/actions/workflows/$FILENAME_OR_WORKFLOW_ID/dispatches \
             -d '{"ref":"refs/heads/main"}'
-            
+
       - uses: actions/checkout@v3

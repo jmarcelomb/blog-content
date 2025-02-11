@@ -17,7 +17,7 @@ cover:
 
 ## Introduction
 
-As a software engineer who spends countless hours typing, both at work and home, I began experiencing soreness in my fingers—especially my pinky, from constantly pressing Ctrl and Shift. You know, the daily grind of copying code that's already been copied by someone else (just kidding… kind of). 
+As a software engineer who spends countless hours typing, both at work and home, I began experiencing soreness in my fingers—especially my pinky, from constantly pressing Ctrl and Shift. You know, the daily grind of copying code that's already been copied by someone else (just kidding… kind of).
 
 Being a bit of a hypochondriac and wanting to safeguard my hands for years of coding ahead, I started researching ergonomic keyboards. That's when I stumbled upon the [ZSA Moonlander Mark I](https://www.zsa.io/moonlander):
 
