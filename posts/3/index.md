@@ -2,7 +2,7 @@
 author: ["Marcelo Borges"]
 title: "Supercharging My Clipboard with OSC52 Escape Sequence"
 date: "2025-02-11"
-description: "Learn how to seamlessly sync your remote clipboard with your local system clipboard using OSC52 escape sequences."
+summary: "Learn how to seamlessly sync your remote clipboard with your local system clipboard using OSC52 escape sequences."
 tags: ["Neovim", "clipboard", "OSC52", "SSH", "terminal", "productivity", "CLI"]
 categories: ["Tech", "Neovim", "Linux"]
 series: ["Neovim Tips", "CLI", "Tips"]

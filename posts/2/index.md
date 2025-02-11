@@ -2,7 +2,7 @@
 author: ["Marcelo Borges"]
 title: "My Journey to Building the Sweep Ergonomic Keyboard"
 date: "2024-08-25"
-description: "Discover how I ventured into the world of DIY mechanical keyboards to create a custom ergonomic keyboard tailored to my needs."
+summary: "Discover how I ventured into the world of DIY mechanical keyboards to create a custom ergonomic keyboard tailored to my needs."
 tags: ["DIY", "Mechanical Keyboards", "Ergonomics", "Open Source", "Miryoku", "ZMK", "3D Printing"]
 categories: ["Technology", "DIY Projects", "3D Printing"]
 series: ["DIY Mechanical Keyboards"]
