@@ -126,4 +126,3 @@ These simple scripts and Neovim integration massively improved my workflow,
 allowing seamless clipboard access over SSH.
 
 I hope they help you as well! 😊 Give them a try, and let me know how they work for you. 🚀
-
