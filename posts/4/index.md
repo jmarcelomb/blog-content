@@ -328,7 +328,7 @@ bind % split-window -h -c "#{pane_current_path}"
 bind '|' split-window -h -c "#{pane_current_path}"
 ```
 
-As panes, the following is setting the new window current path to the current one. 
+As panes, the following is setting the new window current path to the current one.
 
 ```bash
 # New window in same path
@@ -445,7 +445,7 @@ bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 
 # You should change `pbcopy` to your clipboard command!
-bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel "pbcopy" 
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel "pbcopy"
 
 # Don't exit copy mode when dragging with mouse
 unbind -T copy-mode-vi MouseDragEnd1Pane
@@ -641,4 +641,3 @@ And for my friend, I think you have no excuses now ¯\\_(ツ)_/¯, kidding ahah.
 You can find my complete tmux configuration and all my dotfiles at [github.com/jmarcelomb/.dotfiles](https://github.com/jmarcelomb/.dotfiles).
 
 -Marcelo
-
