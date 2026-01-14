@@ -7,7 +7,7 @@ tags: ["tmux", "zellij", "terminal", "cli", "productivity", "configuration", "Ne
 categories: ["Tech", "Tutorials"]
 series: ["TMux", "CLI", "Tips"]
 ShowToc: true
-TocOpen: true
+TocOpen: false
 cover:
   image: images/cover.png
   alt: Tmux cover.
@@ -18,8 +18,7 @@ cover:
 
 I used [TMux](https://github.com/tmux/tmux) in the past, however, it never stuck with me. Since I'm a Rust fan boy, I tried [Zellij](https://zellij.dev/) and I fell in love with it. It had everything that I needed and for me the best was that I didn't have to learn the shortcuts since Zellij UI has all of them. For a beginner, it was a blessing.
 
-I used Zellij in my day-to-day work, however, I saw a youtube video that someone entering something like a VIM selection mode in the terminal copying what they need
-and then continue executing CLI commands. I was intrigued, I searched and I found that terminal emulators have shortcuts to try to do something similar.
+I used Zellij in my day-to-day work, however, I saw a youtube video that someone entering something like a VIM selection mode in the terminal copying what they need and then continue executing CLI commands. I was intrigued, I searched and I found that terminal emulators have shortcuts to try to do something similar. Also I've added a shortcut in Zellij to open the current pane in my editor.
 However, it doesn't feel as native, so I gave tmux a try. I saw some videos and I tried to do a config as close to zellij keybinds since I already had
 the muscle memory. And then, I found tmux copy selection mode and I found my home.
 
@@ -254,15 +253,14 @@ run '~/.config/tmux/plugins/tpm/tpm'
 
 ## Basic TMux Configuration
 
-I'm going to try to describe my config as you don't have knowledge about tmux and why
-I choose the things.
+I'm going to describe my config assuming you're new to tmux, explaining both what I configured and why I made these choices.
 
 First of all, we have to create the `~/.tmux.conf` or `$XDG_CONFIG_HOME/.config/tmux/tmux.conf`, I chose the latter to have everything in there.
 
 ### Leader Key Setup
 
 In tmux we have a leader key and then we can execute commands. The default is `Ctrl b`,
-I tried `Ctrl a`, `Ctrl g` as zellij, but I ended up with `` ` `` by adding the following to the config:
+I tried `Ctrl a`, `Ctrl g` as Zellij, but I ended up with `` ` `` by adding the following to the config:
 
 ```bash
 unbind C-b
@@ -343,9 +341,14 @@ Adding `leader S` to create a new session:
 bind-key S command-prompt -p "Session name:" "new-session -s '%%'"
 ```
 
+I used this a lot on the beginning, but now I just open sessions with `sesh` and they are
+path relative, but more on that later.
+
 ### Window navigation
 
 The following commands is to make possible to move between windows/panes with `Ctrl H` or `Ctrl L` or the one that I use most is `Alt Arrow`. If I want to move from one window to another without going through all the panes I do `Alt Shift Left/Right`. When we are in the left most pane or right most pane, it goes to the next window.
+
+For direct window access, you can jump to a specific window by pressing `leader` followed by the window number. For example, `` ` 1 `` jumps to window 1, `` ` 2 `` to window 2, and so on. This is a built-in tmux feature and very handy when you have many windows open.
 
 ```bash
 # Window navigation
@@ -392,7 +395,7 @@ bind-key -n M-o swap-window -t +1\; select-window -t +1
 
 ## Session Management with Sesh
 
-One of the most powerful features of tmux is session management. Sessions allow you to organize different projects or contexts, and you can detach/attach to them at any time. I use [sesh](https://github.com/joshmedeski/sesh) which is a smart session manager that integrates with tmux, zoxide, and fzf.
+Sessions allow you to organize different projects or contexts, and you can detach/attach to them at any time. I use [sesh](https://github.com/joshmedeski/sesh) which is a smart session manager that integrates with tmux, zoxide, and fzf.
 
 Sesh makes it incredibly easy to switch between projects. It can list your tmux sessions, zoxide directories, and even search for projects. Here are the keybinds I use:
 
@@ -429,6 +432,34 @@ When I press `leader T` (capital T), it opens a fuzzy finder popup where I can:
 This is incredibly powerful for jumping between projects. I also use `leader o` to quickly jump to my last session - I chose `o` because it reminds me of Vim's `Ctrl o` which jumps to the previous location.
 
 <a href="images/sesh.png" target="_blank"><img src="images/sesh.png" alt="Sesh session switcher" style="cursor: pointer;"></a>
+
+## Essential Built-in Commands
+
+While I've customized many keybindings, there are several built-in tmux commands that I use constantly and are worth highlighting:
+
+### Session Commands
+
+- `` ` d `` - **Detach from session** - Detach from your current session and return to your shell. You can reattach with `tmux attach` or `tmux attach -t session-name`. To be honest, I rarely use this on my local machine since I keep tmux running all the time - I only need it if I accidentally close my terminal. The main exception is when connecting to remote servers via SSH, where detaching is essential to keep processes running after disconnecting. For local work, I just switch between sessions using `sesh` instead of detaching.
+
+- `` ` : `` - **Command prompt** - As Vim, you can open the tmux command line where you can execute any tmux command directly. I use it a lot when I forget the keybind to rename a session or window.
+
+- `` ` $ `` - **Rename session** - Opens a prompt to rename the current session.
+
+### Window Commands
+
+- `` ` , `` - **Rename window** - Since I have `allow-rename off` in my config, windows don't rename automatically. I use it to give names that I know what they are for.
+
+### Pane Commands
+
+- `` ` x `` - **Kill pane** - Closes the current pane (with confirmation). If it's the last pane in a window, the window closes too.
+
+- `` ` { `` / `` ` } `` - **Swap pane positions** - Move the current pane backwards (`{`) or forwards (`}`) in the pane arrangement. Great for reorganizing your layout.
+
+- `` ` ! `` - **Break pane into new window** - Takes the current pane and converts it into a new window. Super useful when you realize a pane deserves to be its own window, or when you want to temporarily focus on just that pane without losing your current layout.
+
+### Help
+
+- `` ` ? `` - **List all keybindings** - Shows all available keybindings in a scrollable list. Press `q` to exit. I also added `` ` k `` which opens the keybindings in a fuzzy searchable fzf popup, which seemed like a great idea at first. To be honest though, I rarely use either of them anymore - once you learn your workflow, you just remember the keybindings.
 
 ## Vi Mode & Copy Mode
 
@@ -494,7 +525,32 @@ Now for the functionality plugins that enhance tmux capabilities:
 set -g @plugin 'christoomey/vim-tmux-navigator'
 ```
 
-[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) allows seamless navigation between vim splits and tmux panes. If you use vim/neovim, this is essential.
+[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) allows seamless navigation between vim splits and tmux panes. If you use vim/neovim, this is essential. It lets you use the same keybindings to move between vim splits and tmux panes without thinking about the boundary.
+
+To use it with Neovim, you need to install the plugin on the Neovim side as well. Here's my Neovim configuration (using lazy.nvim):
+
+```lua
+return {
+  "christoomey/vim-tmux-navigator",
+  cmd = {
+    "TmuxNavigateLeft",
+    "TmuxNavigateDown",
+    "TmuxNavigateUp",
+    "TmuxNavigateRight",
+    "TmuxNavigatePrevious",
+    "TmuxNavigatorProcessList",
+  },
+  keys = {
+    { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+    { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+    { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+    { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+    { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+  },
+}
+```
+
+With this setup, `Ctrl h/j/k/l` works seamlessly between Neovim splits and tmux panes. I still use `Alt Arrow` keys most of the time out of habit, but having `Ctrl h/j/k/l` available is great when my hands are already on the home row.
 
 ```bash
 set -g @plugin 'tmux-plugins/tmux-yank'
@@ -542,7 +598,7 @@ I use `leader Ctrl f` and `leader Ctrl u` the most. Combined with tmux-open ment
 Here's a demo showing this in action - using `leader Ctrl f` to search for file paths and `leader Ctrl u` for URLs, then `Ctrl o` to open them in Neovim:
 
 <video width="100%" controls>
-  <source src="videos/tmux-copycat.mov" type="video/mp4">
+  <source src="videos/tmux-copycat.m4v" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -634,6 +690,8 @@ alias be='tpe'
 With tmux there are so many possibilities since the buffers are text and we can pipe them to the programs that we want.
 And with all the tools that exist such as [fzf](https://github.com/junegunn/fzf), [zoxide](https://github.com/ajeetdsouza/zoxide), there are so many automations and workflow improvements that can be done.
 It was a good journey with tmux, and it is going to be. I'm thinking of implementing myself some of the plugins to get a feel of how they are implemented and how they interact with tmux.
+
+**A word of advice if you're just starting out**: Don't feel overwhelmed by all the keybindings in this post. Start slow. I didn't learn everything at once either. Begin with the basics - splitting panes, creating windows, maybe copy mode. Add more keybindings as you need them. One day you'll catch yourself navigating tmux without thinking, and that's when you know it clicked.
 
 With that, I hope at least you learn one new thing or copy on keybind or config that helps you.
 And for my friend, I think you have no excuses now ¯\\_(ツ)_/¯, kidding ahah.
