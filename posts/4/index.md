@@ -122,8 +122,9 @@ bind '-' split-window -v -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 bind '|' split-window -h -c "#{pane_current_path}"
 
-# New window in same path
-bind c new-window -c "#{pane_current_path}"
+# New window in same path (c: next to current, C: at end)
+bind c new-window -ac "#{pane_current_path}"
+bind C new-window -c "#{pane_current_path}"
 bind-key S command-prompt -p "Session name:" "new-session -s '%%'"
 
 # Window navigation
@@ -161,14 +162,17 @@ bind-key -n M-o swap-window -t +1\; select-window -t +1
 # ============================================================================
 
 # Highlight pane when entering copy mode
-set-hook -g pane-mode-changed { if -F "#{pane_in_mode}" "selectp -P bg=#181818" "selectp -P default" }
+set-hook -g pane-mode-changed { if -F "#{pane_in_mode}" "selectp -P bg=#313447" "selectp -P default" }
 
 set-window-option -g mode-keys vi
 
 # Vi-style copy mode keybindings
 bind-key -T copy-mode-vi v send-keys -X begin-selection
+# Rectangle selection like Vim blockwise visual
 bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel "pbcopy"
+
+bind-key -T copy-mode-vi y send-keys -X copy-selection "pbcopy"
+bind-key -T copy-mode-vi Y send-keys -X copy-selection-and-cancel "pbcopy"
 
 # AI Ask with selection - copy selection and open AI chat
 bind-key -T copy-mode-vi a send-keys -X copy-selection \; run-shell "$HOME/.config/tmux/scripts/ai-ask-selection.sh"
@@ -189,10 +193,10 @@ set -g @plugin 'catppuccin/tmux'
 
 # Functionality plugins
 set -g @plugin 'christoomey/vim-tmux-navigator'
-set -g @plugin 'tmux-plugins/tmux-yank'
+# set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'omerxx/tmux-floax'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-open'
 set -g @plugin 'tmux-plugins/tmux-copycat'
 set -g @plugin 'schasse/tmux-jump'
@@ -206,7 +210,7 @@ set -g @plugin 'schasse/tmux-jump'
 # ============================================================================
 
 # Enable tmux-resurrect to capture pane contents and tmux-continuum to automatically restore sessions
-set -g @resurrect-capture-pane-contents 'on'
+# set -g @resurrect-capture-pane-contents 'on'
 # set -g @continuum-restore 'on'
 
 # Floax configuration
@@ -326,11 +330,12 @@ bind % split-window -h -c "#{pane_current_path}"
 bind '|' split-window -h -c "#{pane_current_path}"
 ```
 
-As panes, the following is setting the new window current path to the current one.
+As panes, the following is setting the new window current path to the current one. I've also set up two ways to create new windows - `` ` c `` (lowercase) creates a new window right **after** the current window (using the `-a` flag), which keeps related windows grouped together. Meanwhile, `` ` C `` (uppercase/Shift+c) creates a window at the **end** of the window list, useful when you want to add a new window without disrupting your current window order.
 
 ```bash
-# New window in same path
-bind c new-window -c "#{pane_current_path}"
+# New window in same path (c: next to current, C: at end)
+bind c new-window -ac "#{pane_current_path}"
+bind C new-window -c "#{pane_current_path}"
 ```
 
 ### Session Management
@@ -464,7 +469,8 @@ While I've customized many keybindings, there are several built-in tmux commands
 ## Vi Mode & Copy Mode
 
 For me, where tmux shines is in the copy mode. You can enter it using `leader [`. And then you can move around, use vim motions, for example `v` for start selecting, `V` for full line selection. `w` for moving between words, `b` for back, `f` for find and so on.
-You can do `y` for yank (copy), and `?` for search upwards, and then use the normal `n` for next, and `N` for previous. We can do more, but, I will talk in the plugin section.
+
+I've set up two yank bindings: `y` copies the selection but keeps you in copy mode (great for copying multiple things), while `Y` (Shift+y) yanks and exits copy mode in one go. You can also use `?` for search upwards, and then use the normal `n` for next, and `N` for previous. We can do more, but, I will talk in the plugin section.
 
 Here is the config:
 
@@ -473,20 +479,23 @@ set-window-option -g mode-keys vi
 
 # Vi-style copy mode keybindings
 bind-key -T copy-mode-vi v send-keys -X begin-selection
+# Rectangle selection like Vim blockwise visual
 bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 
 # You should change `pbcopy` to your clipboard command!
-bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel "pbcopy"
+# y stays in copy mode, Y yanks and exits copy mode
+bind-key -T copy-mode-vi y send-keys -X copy-selection "pbcopy"
+bind-key -T copy-mode-vi Y send-keys -X copy-selection-and-cancel "pbcopy"
 
 # Don't exit copy mode when dragging with mouse
 unbind -T copy-mode-vi MouseDragEnd1Pane
 ```
 
-Since sometimes I was entering copy mode without noticing, for me the following config was a game changer, when in copy mode, it sets the background to the color #181818.
+Since sometimes I was entering copy mode without noticing, the following config was a game changer for me. When in copy mode, it sets the background to the color #313447 (matching my Catppuccin Frappe theme). In my terminal, I have some opacity when I'm not in copy mode, and when I enter copy mode the opacity disappears. My last color was #181818 (black), but meanwhile I got used to copy mode, so I wanted a less disruptive way to indicate the mode change.
 
 ```bash
 # Highlight pane when entering copy mode
-set-hook -g pane-mode-changed { if -F "#{pane_in_mode}" "selectp -P bg=#181818" "selectp -P default" }
+set-hook -g pane-mode-changed { if -F "#{pane_in_mode}" "selectp -P bg=#313447" "selectp -P default" }
 ```
 
 You can add keybinds so that you can select text and then call a script that you made,
@@ -553,10 +562,10 @@ return {
 With this setup, `Ctrl h/j/k/l` works seamlessly between Neovim splits and tmux panes. I still use `Alt Arrow` keys most of the time out of habit, but having `Ctrl h/j/k/l` available is great when my hands are already on the home row.
 
 ```bash
-set -g @plugin 'tmux-plugins/tmux-yank'
+# set -g @plugin 'tmux-plugins/tmux-yank'
 ```
 
-[tmux-yank](https://github.com/tmux-plugins/tmux-yank) enhances copying to system clipboard. It handles the clipboard commands for different operating systems automatically.
+**Note:** I've commented out [tmux-yank](https://github.com/tmux-plugins/tmux-yank) because I now handle clipboard operations directly in my config using `pbcopy`. This gives me control over when yanking exits copy mode - I have `y` to yank and stay in copy mode, and `Y` to yank and exit. The plugin is useful if you need cross-platform clipboard support automatically, but since I'm on macOS and have my clipboard commands set up, I don't need the extra plugin. If you're on Linux or want automatic clipboard detection, you can uncomment this plugin - though note that it may handle the `y` and `Y` keybindings differently, so you might not need my custom bindings if you use tmux-yank.
 
 ```bash
 set -g @plugin 'omerxx/tmux-floax'
@@ -565,11 +574,11 @@ set -g @plugin 'omerxx/tmux-floax'
 [tmux-floax](https://github.com/omerxx/tmux-floax) adds floating windows support. I use `Alt f` to toggle a floating terminal like in Zellij, which is great for quick commands. However, I rarely use it anymore since it doesn't feel as native as Zellij's implementation.
 
 ```bash
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
 ```
 
-[tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) lets you save and restore tmux sessions, even after a system restart. [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) automates this process by continuously saving sessions.
+**Note:** I've commented out [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) and [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum). These plugins let you save and restore tmux sessions, even after a system restart, with continuum automating the process by continuously saving sessions. I don't use them because I actually don't mind losing my sessions and windows - if they get cleared, it forces me to clean up my environment. It's a fresh start. If you prefer to have everything restored exactly as it was, these are excellent plugins to uncomment.
 
 ```bash
 set -g @plugin 'tmux-plugins/tmux-open'
@@ -612,14 +621,14 @@ set -g @plugin 'schasse/tmux-jump'
 
 ### Plugin Configuration
 
-For tmux-resurrect, I enable capturing pane contents so that the actual terminal content is saved:
+For tmux-resurrect and tmux-continuum (if you decide to uncomment them), here's the configuration I have ready:
 
 ```bash
-set -g @resurrect-capture-pane-contents 'on'
+# set -g @resurrect-capture-pane-contents 'on'
 # set -g @continuum-restore 'on'
 ```
 
-I have `@continuum-restore` commented out because I prefer to manually restore sessions rather than having it happen automatically.
+The first option would enable capturing pane contents so that the actual terminal content is saved, not just the command that was running. The second would make continuum automatically restore sessions on tmux start. I keep these commented out since I don't use the plugins currently, but they're here if I need them.
 
 For the floating terminal plugin:
 
