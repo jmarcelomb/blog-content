@@ -218,8 +218,8 @@ set -g @catppuccin_flavor "frappe"
 set -g @catppuccin_window_status_style "basic"
 set -g @catppuccin_window_current_text " #{window_name}"
 set -g @catppuccin_window_text " #{window_name}"
-set -g @catppuccin_window_current_number_color "#{?window_zoomed_flag,#{@thm_yellow},#{@thm_mauve}}" # typos: ignore
-set -g @catppuccin_window_number_color "#{?window_zoomed_flag,#{@thm_yellow},#{@thm_overlay_2}}" # typos: ignore
+set -g @catppuccin_window_current_number_color "#{?window_zoomed_flag,#{@them_yellow},#{@them_mauve}}" # typos: ignore
+set -g @catppuccin_window_number_color "#{?window_zoomed_flag,#{@them_yellow},#{@them_overlay_2}}" # typos: ignore
 
 # ============================================================================
 # STATUS LINE CONFIGURATION
@@ -636,8 +636,8 @@ set -g @catppuccin_flavor "frappe"
 set -g @catppuccin_window_status_style "basic"
 set -g @catppuccin_window_current_text " #{window_name}"
 set -g @catppuccin_window_text " #{window_name}"
-set -g @catppuccin_window_current_number_color "#{?window_zoomed_flag,#{@thm_yellow},#{@thm_mauve}}" # typos: ignore
-set -g @catppuccin_window_number_color "#{?window_zoomed_flag,#{@thm_yellow},#{@thm_overlay_2}}" # typos: ignore
+set -g @catppuccin_window_current_number_color "#{?window_zoomed_flag,#{@them_yellow},#{@them_mauve}}" # typos: ignore
+set -g @catppuccin_window_number_color "#{?window_zoomed_flag,#{@them_yellow},#{@them_overlay_2}}" # typos: ignore
 ```
 
 I use the "frappe" flavor which is a nice dark theme. The window number changes color to yellow when zoomed (`` ` m `` to maximize a pane), which gives good visual feedback.
@@ -681,8 +681,8 @@ I use the following aliases to open the current pane in my editor.
 
 ```bash
 alias tpe='tmux capture-pane -Jp | $EDITOR'
-alias tbe='tpe'
-alias be='tpe'
+alias tbe='type'
+alias be='type'
 ```
 
 ## Conclusion
